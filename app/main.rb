@@ -34,10 +34,10 @@ class Main
 
 
   def self.politician_total_percentage(gender, title)
-    total = Politician.where(title: title, :in_office = 1).length
-    count = Politician.where(title: title, gender: gender, :in_office = 1).length
+    total = Politician.where(title: title, in_office: 1).length
+    count = Politician.where(title: title, gender: gender, in_office: 1).length
     percentage = count.to_f / total.to_f * 100
-    puts "#{total} (#{percentage.round})"
+    puts "#{count} (#{percentage.round})"
   end
 end
 
