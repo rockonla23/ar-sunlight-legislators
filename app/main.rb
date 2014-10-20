@@ -3,7 +3,7 @@ require_relative 'models/state'
 require_relative 'models/party'
 
 class Main
-
+  #--------------1st Question-----------------
   def self.print_state_politician(state)
     puts "Senators (State: #{state})"
     self.state_politician(state, 'Sen')
@@ -19,13 +19,27 @@ class Main
     politicians = Politician.where(state: state, title: title)
 
     politicians.each do |politician|
-        puts "#{politician.name}: (#{politician.party.name})"
+        puts "#{politician.name} (#{politician.party.name})"
     end
   end
 
-  # def self.print_politician_percentage(gender)
-  # end
 
+  #--------------2nd Question-----------------
+  def self.print_politician_percentage(gender)
+    puts "#{gender} Senators: "
+    self.politician_total_percentage(gender, 'Sen')
+    puts "#{gender} Representatives: "
+    self.politician_total_percentage(gender, 'Rep')
+  end
+
+
+  def self.politician_total_percentage(gender, title)
+    total = Politician.where(title: title).length
+    count = Politician.where(title: title, gender: gender).length
+    percentage = count.to_f / total.to_f * 100
+    puts "#{total} (#{percentage.round})"
+  end
 end
 
-Main.print_state_politician("CA")
+#Main.print_state_politician("CA")
+Main.print_politician_percentage("M")
